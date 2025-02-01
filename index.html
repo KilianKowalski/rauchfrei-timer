@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rauchfrei seit</title>
+    <title>Rauchfrei Timer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,7 +36,7 @@
 </head>
 <body>
 
-    <h1>Du bist rauchfrei seit:</h1>
+    <h1>Kilian ist rauchfrei seit:</h1>
     <div class="container">
         <div class="info">⏳ <span id="timer" class="highlight"></span></div>
         <div class="info">💰 Gespartes Geld: <span id="moneySaved" class="highlight"></span></div>
@@ -57,7 +57,7 @@
             const moneySaved = (weeks * 10).toFixed(2); 
 
             document.getElementById("timer").innerHTML = 
-                `${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+                `${days} Tagen, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
 
             document.getElementById("moneySaved").innerHTML = `${moneySaved} €`;
         }
