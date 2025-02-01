@@ -1,19 +1,70 @@
 <!DOCTYPE html>
-<html lang="de-CH">
-
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <title>Nichtraucher-Statistik</title>
-  <script type="module" crossorigin src="/assets/index.78e63766.js"></script>
-  <link rel="stylesheet" href="/assets/index.ee30dc89.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rauchfrei seit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #2c3e50;
+            color: white;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .info {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .highlight {
+            color: #2ecc71;
+            font-size: 28px;
+        }
+    </style>
 </head>
-
 <body>
-  <div id="app"></div>
-  
-</body>
 
+    <h1>Du bist rauchfrei seit:</h1>
+    <div class="container">
+        <div class="info">⏳ <span id="timer" class="highlight"></span></div>
+        <div class="info">💰 Gespartes Geld: <span id="moneySaved" class="highlight"></span></div>
+    </div>
+
+    <script>
+        function updateStats() {
+            const startDate = new Date("2025-01-22T00:00:00"); 
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            const weeks = diff / (1000 * 60 * 60 * 24 * 7);
+            const moneySaved = (weeks * 10).toFixed(2); 
+
+            document.getElementById("timer").innerHTML = 
+                `${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+
+            document.getElementById("moneySaved").innerHTML = `${moneySaved} €`;
+        }
+
+        setInterval(updateStats, 1000);
+        updateStats();
+    </script>
+
+</body>
 </html>
