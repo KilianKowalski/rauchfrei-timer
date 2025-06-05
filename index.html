@@ -38,6 +38,16 @@
             color: #2ecc71;
             font-size: 28px;
         }
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -51,26 +61,41 @@
         <div class="container">
             <div class="info">💰 Gespartes Geld: <span id="moneySaved" class="highlight"></span></div>
         </div>
+        <div class="container">
+            <div class="info">🚭 Nicht gerauchte Zigaretten: <span id="cigarettesSaved" class="highlight"></span></div>
+        </div>
     </div>
+
+    <footer>
+        <p>
+            <a href="/impressum">Impressum</a> | 
+            <a href="https://github.com/dein-github-repo" target="_blank">GitHub Quellcode</a>
+        </p>
+    </footer>
 
     <script>
         function updateStats() {
             const startDate = new Date("2025-02-22T00:23:00"); 
             const now = new Date();
             const diff = now - startDate;
-            
+
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
 
-            const weeks = diff / (1000 * 60 * 60 * 24 * 7);
-            const moneySaved = (weeks * 10).toFixed(2); 
+            const totalMinutes = diff / (1000 * 60);
+            const cigarettesPerDay = 4;
+            const cigarettesSkipped = Math.floor((diff / (1000 * 60 * 60 * 24)) * cigarettesPerDay);
+            
+            
+            const moneySaved = (cigarettesSkipped * 1).toFixed(2);
 
             document.getElementById("timer").innerHTML = 
                 `${days} Tagen, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
 
             document.getElementById("moneySaved").innerHTML = `${moneySaved} €`;
+            document.getElementById("cigarettesSaved").innerHTML = `${cigarettesSkipped}`;
         }
 
         setInterval(updateStats, 1000);
